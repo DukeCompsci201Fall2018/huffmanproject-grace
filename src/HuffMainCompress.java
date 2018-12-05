@@ -41,6 +41,7 @@ public class HuffMainCompress {
 		
 		in.reset();
 		writeCompressedBits(codings, in, out);
+		//codings above is like encoding
 		out.close();
  	}
 	
@@ -124,6 +125,10 @@ public class HuffMainCompress {
 	
 	public void writeCompressedBits(String[] encodings, BitInputStream in, BitInputStream out) {
 		
+		while (true) {
+			int bits = in.readBits(BITS_PER_WORD);
+			
+		}
 		read file 
 		encode character
 		find it in encodings
