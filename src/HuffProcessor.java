@@ -121,7 +121,7 @@ public class HuffProcessor {
 		HuffNode root = makeTreeFromCounts(counts);
 		String[] codings = makeCodingsFromTree(root); 
 
-		out.writeBits(HuffProcessor.BITS_PER_INT, HuffProcessor.HUFF_TREE);
+		out.writeBits(BITS_PER_INT, HUFF_TREE);
 		writeHeader(root, out);
 		
 		in.reset();
@@ -141,6 +141,7 @@ public class HuffProcessor {
 			myInts257[value] += 1;
 			//will read these bits and convert from binary to normal
 		}
+		myInts257[PSEUDO_EOF] = 1;
 		return myInts257;
 	}
 	
@@ -204,7 +205,8 @@ public class HuffProcessor {
 		
 		else if (root.myLeft == null && root.myRight == null) {
 			out.writeBits(1, 1);
-			out.writeBits(BITS_PER_WORD, root.myValue);
+			out.writeBits(BITS_PER_WORD + 1, root.myValue);
+			//changed to bpw + 1
 		}
 	}
 	
